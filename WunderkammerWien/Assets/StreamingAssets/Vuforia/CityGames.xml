@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="Card_06_German_Covered_28082018-1" size="0.135100 0.243363" />
+    <ImageTarget name="Card_04_German_Covered_28082018-1" size="0.135100 0.243211" />
+    <ImageTarget name="Card_05_German_Covered_28082018-1" size="0.135100 0.243211" />
+    <ImageTarget name="Card_03_German_Covered_28082018-1" size="0.135100 0.243211" />
+    <ImageTarget name="Card_02_German_Covered_28082018-1" size="0.135100 0.243211" />
+    <ImageTarget name="Card_01_German_Covered_28082018-1" size="0.135100 0.243485" />
+    <ImageTarget name="Karte_RZ_German_PRINT_Back" size="0.260000 0.204630" />
+    <ImageTarget name="Card_06_German_PRINT_Back" size="0.135000 0.243030" />
+    <ImageTarget name="Card_05_German_PRINT_Back" size="0.135000 0.243030" />
+    <ImageTarget name="Card_04_German_PRINT_Back" size="0.135000 0.243030" />
+    <ImageTarget name="Card_03_German_PRINT_Back" size="0.135000 0.243030" />
+    <ImageTarget name="Card_01_German_PRINT_Back" size="0.135000 0.243030" />
+    <ImageTarget name="Karte_RZ_German_PRINT_28082018-2" size="0.260400 0.204594" />
+    <ImageTarget name="Card_06_German_PRINT_28082018-1" size="0.128700 0.221044" />
+    <ImageTarget name="Card_05_German_PRINT_28082018-1" size="0.128700 0.221044" />
+    <ImageTarget name="Card_04_German_PRINT_28082018-1" size="0.128700 0.221044" />
+    <ImageTarget name="Card_03_German_PRINT_28082018-1" size="0.128700 0.221044" />
+    <ImageTarget name="Card_02_German_PRINT_28082018-1" size="0.128700 0.221044" />
+    <ImageTarget name="Card_01_German_PRINT_28082018-1" size="0.128690 0.221027" />
+  </Tracking>
+</QCARConfig>
