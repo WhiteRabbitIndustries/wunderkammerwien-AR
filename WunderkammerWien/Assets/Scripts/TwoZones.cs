@@ -67,161 +67,160 @@ public class TwoZones : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (captured1 == true)
+
+
+		playerInZone = IsPlayerInZone();
+
+		switch (state)
 		{
-			CardObject.SetActive(true);
-			CardBackObject1.SetActive(true);
-			if (captured2 == true)
-			{
-				CardObject2.SetActive(true);
-				CardBackObject2.SetActive(true);
-			}
-			playerInZone = IsPlayerInZone();
-
-			switch (state)
-			{
-				#region locked
-				case State.locked:
+			#region locked
+			case State.locked:
 
 
 
-					if (UiManager.GetComponent<Monsters>().GpsEnabled == false && codeIsRight1 == true)
-					{
-
-						audioManager.GetComponent<SoundManager>().PlayNarration(capturedClip);
-						SwitchState(State.captured);
-					}
-					if (UiManager.GetComponent<Monsters>().GpsEnabled == false && codeIsRight2 == true)
-					{
-						SwitchState(State.capturedAll);
-						audioManager.GetComponent<SoundManager>().PlayNarration(capturedClip2);
-						hexagon.GetComponent<Renderer>().material = capturedMaterial;
-					}
-					if (playerInZone == true)
-					{
-
-						lockedParticle.Stop();
-						divineLight.gameObject.SetActive(true);
-						audioManager.GetComponent<SoundManager>().PlayZone(unlockedClip, audioS);
-						SwitchState(State.unlocked);
-					}
-					if (captured2 == true)
-					{
-						SwitchState(State.capturedAll);
-						hexagon.GetComponent<Renderer>().material = capturedMaterial;
-					}
-					if (captured1 == true)
-					{
-						SwitchState(State.captured);
-					}
-					break;
-				#endregion
-				#region unlocked
-				case State.unlocked:
-
-					if (playerInZone == false)
-					{
-						lockedParticle.Play();
-						divineLight.gameObject.SetActive(false);
-						audioS.Stop();
-						SwitchState(State.locked);
-
-					}
-					if (playerInZone == true && codeIsRight1 == true || captured1 == true)
-					{
-
-						audioManager.GetComponent<SoundManager>().PlayNarration(capturedClip);
-						audioManager.GetComponent<SoundManager>().PlayZone(unlockedClip2, audioS);
-						SwitchState(State.captured);
-					}
-
-					break;
-				#endregion
-				#region captured
-				case State.captured:
-					//divineLight.enabled = true;
-					if (img1.gameObject.activeSelf == false)
-					{
-						img1.gameObject.SetActive(true);
-					}
-					if (playerInZone == true)
-					{
-						//lockedParticle.Stop();
-					}
-					else
-					{
-						lockedParticle.Play();
-					}
-					audioS.clip = unlockedClip2;
-					audioS.Play();
-
-					captured1 = true;
-					if (IsPlayerInZone() == true && codeIsRight1 == true && codeIsRight2 == true || captured2 == true || UiManager.GetComponent<Monsters>().GpsEnabled == false && codeIsRight2 == true)
-					{
-
-						audioManager.GetComponent<SoundManager>().PlayNarration(capturedClip2);
-						hexagon.GetComponent<Renderer>().material = capturedMaterial;
-						SwitchState(State.capturedAll);
-					}
-
-					break;
-				#endregion
-				#region capturedAll
-				case State.capturedAll:
-					if (img2.gameObject.activeSelf == false)
-					{
-						img2.gameObject.SetActive(true);
-					}
-					lockedParticle.Stop();
-					captured2 = true;
-
-
-					break;
-					#endregion
-			}
-		}
-	}
-		void SwitchState(State newState)
-		{
-			state = newState;
-		}
-		public bool IsPlayerInZone()
-		{
-			//determenes if player is located with in the play area 
-			bool inZone;
-
-			if (GPS.Instance.latitude >= MLatitude - radius * kmInLat && GPS.Instance.latitude <= MLatitude + radius * kmInLat)
-			{
-				if (GPS.Instance.longitude >= MLongitude - radius * kmInLong && GPS.Instance.longitude <= MLongitude + radius * kmInLong)
+				if (UiManager.GetComponent<Monsters>().GpsEnabled == false && codeIsRight1 == true)
 				{
 
-					inZone = true;
+					audioManager.GetComponent<SoundManager>().PlayNarration(capturedClip);
+					SwitchState(State.captured);
+				}
+				if (UiManager.GetComponent<Monsters>().GpsEnabled == false && codeIsRight2 == true)
+				{
+					SwitchState(State.capturedAll);
+					audioManager.GetComponent<SoundManager>().PlayNarration(capturedClip2);
+					hexagon.GetComponent<Renderer>().material = capturedMaterial;
+				}
+				if (playerInZone == true)
+				{
+
+					lockedParticle.Stop();
+					divineLight.gameObject.SetActive(true);
+					audioManager.GetComponent<SoundManager>().PlayZone(unlockedClip, audioS);
+					SwitchState(State.unlocked);
+				}
+				if (captured2 == true)
+				{
+
+					CardObject.SetActive(true);
+					CardBackObject1.SetActive(true);
+					SwitchState(State.capturedAll);
+					hexagon.GetComponent<Renderer>().material = capturedMaterial;
+				}
+				if (captured1 == true)
+				{
+					CardObject2.SetActive(true);
+					CardBackObject2.SetActive(true);
+					SwitchState(State.captured);
+				}
+				break;
+			#endregion
+			#region unlocked
+			case State.unlocked:
+
+				if (playerInZone == false)
+				{
+					lockedParticle.Play();
+					divineLight.gameObject.SetActive(false);
+					audioS.Stop();
+					SwitchState(State.locked);
+
+				}
+				if (playerInZone == true && codeIsRight1 == true || captured1 == true)
+				{
+
+					audioManager.GetComponent<SoundManager>().PlayNarration(capturedClip);
+					audioManager.GetComponent<SoundManager>().PlayZone(unlockedClip2, audioS);
+
+					SwitchState(State.captured);
+				}
+
+				break;
+			#endregion
+			#region captured
+			case State.captured:
+				//divineLight.enabled = true;
+				if (img1.gameObject.activeSelf == false)
+				{
+					img1.gameObject.SetActive(true);
+				}
+				if (playerInZone == true)
+				{
+					//lockedParticle.Stop();
 				}
 				else
 				{
-					inZone = false;
+					lockedParticle.Play();
 				}
+
+
+				captured1 = true;
+				if (IsPlayerInZone() == true && codeIsRight1 == true && codeIsRight2 == true || captured2 == true || UiManager.GetComponent<Monsters>().GpsEnabled == false && codeIsRight2 == true)
+				{
+
+					audioManager.GetComponent<SoundManager>().PlayNarration(capturedClip2);
+					hexagon.GetComponent<Renderer>().material = capturedMaterial;
+					SwitchState(State.capturedAll);
+				}
+
+				break;
+			#endregion
+			#region capturedAll
+			case State.capturedAll:
+				if (img2.gameObject.activeSelf == false)
+				{
+					img2.gameObject.SetActive(true);
+				}
+				lockedParticle.Stop();
+				captured2 = true;
+
+
+				break;
+				#endregion
+
+		}
+	}
+	void SwitchState(State newState)
+	{
+		state = newState;
+	}
+	public bool IsPlayerInZone()
+	{
+		//determenes if player is located with in the play area 
+		bool inZone;
+
+		if (GPS.Instance.latitude >= MLatitude - radius * kmInLat && GPS.Instance.latitude <= MLatitude + radius * kmInLat)
+		{
+			if (GPS.Instance.longitude >= MLongitude - radius * kmInLong && GPS.Instance.longitude <= MLongitude + radius * kmInLong)
+			{
+
+				inZone = true;
 			}
 			else
 			{
 				inZone = false;
 			}
-
-
-			return inZone;
-
 		}
-		public void Code(string name)
+		else
 		{
-			if (name == monster)
-			{
-				codeIsRight1 = true;
-			}
-			else if (name == monster2)
-			{
-				codeIsRight2 = true;
-			}
+			inZone = false;
+		}
+
+
+		return inZone;
+
+	}
+	public void Code(string name)
+	{
+		if (name == monster)
+		{
+			codeIsRight1 = true;
+		}
+		else if (name == monster2)
+		{
+			codeIsRight2 = true;
 		}
 	}
+}
+
 
 
